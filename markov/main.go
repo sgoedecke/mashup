@@ -19,9 +19,15 @@ func NewMarkov() *MarkovDict {
 }
 
 func (m *MarkovDict) Add(s string) {
+	// remove extra whitespace and treat semicolons like full stops
 	re := regexp.MustCompile(`(\s)+`)
 	s = re.ReplaceAllString(s, " ")
 	s = strings.Replace(s, ";", ". ", -1)
+
+	// remove all parentheticals
+	re_paren := regexp.MustCompile(` /(*?/)`)
+	s = re_paren.ReplaceAllString(s, "")
+
 	sentences := strings.Split(s+" ", ". ")
 	for _, sentence := range sentences {
 		words := strings.Split(sentence, " ")
