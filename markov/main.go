@@ -25,7 +25,7 @@ func (m *MarkovDict) Add(s string) {
 	s = strings.Replace(s, ";", ". ", -1)
 
 	// remove all parentheticals
-	re_paren := regexp.MustCompile(` /((.*?)/)`)
+	re_paren := regexp.MustCompile(` \((.*?)\)`)
 	s = re_paren.ReplaceAllString(s, "")
 
 	sentences := strings.Split(s+" ", ". ")
