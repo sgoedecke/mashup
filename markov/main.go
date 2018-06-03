@@ -21,6 +21,7 @@ func NewMarkov() *MarkovDict {
 func (m *MarkovDict) Add(s string) {
 	re := regexp.MustCompile(`(\s)+`)
 	s = re.ReplaceAllString(s, " ")
+	s = strings.Replace(s, ";", ". ")
 	sentences := strings.Split(s+" ", ". ")
 	for _, sentence := range sentences {
 		words := strings.Split(sentence, " ")
