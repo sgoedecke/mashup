@@ -2,6 +2,7 @@ package main
 
 import (
 	"flag"
+	"fmt"
 	"github.com/sgoedecke/mashup/markov"
 	"github.com/sgoedecke/mashup/scraper"
 	"math/rand"
@@ -16,8 +17,8 @@ func main() {
 	rand.Seed(time.Now().Unix())
 
 	dict := markov.NewMarkov()
-	fmt.Println(flag.Args())
 	for _, url := range flag.Args() {
+		fmt.Println("Processing " + url + "...")
 		resp, err := http.Get(url)
 		if err != nil {
 			panic(err)
