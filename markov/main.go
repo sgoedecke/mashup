@@ -2,6 +2,7 @@ package markov
 
 import (
 	"math/rand"
+	"regexp"
 	"strings"
 )
 
@@ -18,7 +19,8 @@ func NewMarkov() *MarkovDict {
 }
 
 func (m *MarkovDict) Add(s string) {
-	s = strings.Replace(s, "\n", " ", -1)
+	re := regexp.MustCompile(`(\s)+`)
+	s = re.ReplaceAllString(s, " ")
 	sentences := strings.Split(s+" ", ". ")
 	for _, sentence := range sentences {
 		words := strings.Split(sentence, " ")
